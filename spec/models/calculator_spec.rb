@@ -28,9 +28,13 @@ RSpec.describe Calculator, type: :model do
     end
 
     it 'should supports custom delimiters' do
-      # byebug
       data = Calculator.create
-      expect(data.add('//;\n1;2')).to eq(3)
+      expect(data.add("//;\n1;2")).to eq(3)
+    end
+
+    it 'throws an exception for negative numbers' do
+      data = Calculator.new
+      expect { data.add("2,-8,-5") }.to raise_error("Negative numbers not allowed: -8, -5")
     end
   end
 end
